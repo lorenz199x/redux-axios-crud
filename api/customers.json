@@ -1,0 +1,44 @@
+{
+  "customers": [
+    {
+      "title": "Business Website",
+      "category": "Web Design",
+      "id": 1
+    },
+    {
+      "title": "social app",
+      "category": "Mobile Dev",
+      "id": 4
+    },
+    {
+      "title": "e shop cart",
+      "category": "Web Dev",
+      "id": 5
+    },
+    {
+      "title": "aaaa",
+      "category": "Mobile Dev",
+      "id": 6
+    },
+    {
+      "title": "cvvv",
+      "category": "Web Dev",
+      "id": 7
+    },
+    {
+      "title": "bbb",
+      "category": "Mobile Dev",
+      "id": 8
+    },
+    {
+      "title": "gzzzz",
+      "category": "Web Dev",
+      "id": 9
+    },
+    {
+      "title": "xxxxx",
+      "category": "Web Dev",
+      "id": 10
+    }
+  ]
+}
