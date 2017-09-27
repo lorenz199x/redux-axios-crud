@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+//import React from 'react';
 import axios from 'axios';
 
 export function onChangeForm(title, category) {
@@ -7,7 +7,6 @@ export function onChangeForm(title, category) {
         axios.get("http://localhost:4000/customers")
         .then((response) => {
             dispatch({ type: 'RECEIVE_TITLE', payload: response.data});
-            // console.log('response',response);
         })
         .catch((err) => {
             dispatch({ type: 'FETCH_TITLE_ERROR', payload: err})
@@ -16,9 +15,11 @@ export function onChangeForm(title, category) {
 }
 
 export function onSubmitForm(title, category) {
-   // let { books } = this.props;
     return (dispatch) => {
         if  (title === '' || category === ''){
+            console.log('all fields are required');
+            
+        } else {
             axios.post("http://localhost:4000/customers")
             .then((response) => {
                 dispatch({
@@ -26,15 +27,14 @@ export function onSubmitForm(title, category) {
                     payload: {
                         title,
                         category
-                    } 
-                }); console.log('response',response);
+                    }
+                });
             })
             .catch(error => {
                     console.log(error);
                 });
-            
         }
-        else {
+       // else {
             // axios.put("http://localhost:4000/customers/${data.id}")
             // .then(response => {
             //     dispatch({
@@ -54,35 +54,28 @@ export function onSubmitForm(title, category) {
             // .catch(error => {
             //         console.log(error);
             // });
-        }
+        //}
     }
 }
 
-export  function onDelete(title, category) {
-    let { books } = this.props;
-    return (dispatch) => {
-        axios.delete("http://localhost:4000/customers/${data.id}")
-        .then(response => {
-            dispatch({
-                type: 'DELETE_TITLE',
-                payload: {
-                    title,
-                    category
-                }
-            })
-            books === books.filter(d => {
-                if (d.id !== books.id) {
-					return books;
-				}
-            });
-        })
-    }
-}
+// export  function onDelete(title, category) {
+//     let { books } = this.props;
+//     return (dispatch) => {
+//         axios.delete("http://localhost:4000/customers/")
+//         .then(response => {
+//             dispatch({
+//                 type: 'DELETE_TITLE',
+//                 payload: {
+//                     title,
+//                     category
+//                 }
+//             })
+//             books === books.filter(d => {
+//                 if (d.id !== books.id) {
+// 					return books;
+// 				}
+//             });
+//         })
+//     }
+// }
 
-
-export function setTitle (title, category) {
-    return {
-        type: 'SET_TITLE_CATEGORY',
-        payload: title, category
-    }
-} 

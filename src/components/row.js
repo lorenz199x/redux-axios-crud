@@ -11,19 +11,17 @@ const mapStateToProps = (state) => ({
 
 
  class Row extends Component {
-     componentWillMount() {
+     componentDidMount() {
         this.props.dispatch(onChangeForm())
     }
 
 
     render() {
-        //let { data, edit, onDelete } = this.props;
         let { user } = this.props;
         return (
             <tr>
                 <td>{user}</td>
                 <td>{user}</td>
-                {/*<td>{data.age}</td>*/}
                 <td>
                     <button className="btn btn-info" >Edit</button>
                     <button className="btn btn-danger" >Delete</button>

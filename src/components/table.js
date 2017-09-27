@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
 
-//import Row from './row';
 import { connect } from 'react-redux';
-import { onChangeForm, onSubmitForm, } from '../redux/actions/index';
+import { onChangeForm } from '../redux/actions/index';
 
-const mapStateToProps = (state) => ({
-	return: {
-		user: state.user
+const mapStateToProps = (store) => {
+	return {
+		user: store.user.books,
 	}
-});
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onChangeForm: () => dispatch(onChangeForm())
-    };
-}
+};
 
 class Table extends Component {
    
-    componentWillMount() {
-        this.props.dispatch(onChangeForm())
+    componentDidMount() {
+        this.props.dispatch(onChangeForm());
+        
     }
 
     render() {
-        let { user, books } = this.props;
-        //let mapBooks = this.props.user.map()
-       
-         let usermap = this.props.user.map(books => <td> {user.title} </td>)
-            
-
-       // let mapuser = this.props.user.map(title => <td> {user.title} </td>)
-        //console.log('MALAKING ERROR', this.props)
+        let { user } = this.props;
         return (
             <table className="table table-inverse">
                 <thead>
@@ -43,16 +30,19 @@ class Table extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                     {usermap}
-                    <tr>
-                       <td></td>
-                       <td></td>
-                        <td>
-                            <button className="btn btn-info" >Edit</button>
-                            <button className="btn btn-danger" >Delete</button>
-                        </td>
-                    </tr> 
-                       
+                    {user.map((user, index) => {
+                            return (
+                                 <tr  key={index}>
+                                    <td> {user.title} </td>
+                                    <td >{user.category}</td>
+                                
+                                    <td>
+                                        <button className="btn btn-info" >Edit</button>
+                                        <button className="btn btn-danger" >Delete</button>
+                                    </td>
+                                </tr> 
+                            )
+                        })}
                 </tbody>
             </table>
         )   

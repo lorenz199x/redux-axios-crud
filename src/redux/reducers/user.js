@@ -1,16 +1,13 @@
 
 
 let initialState = {
-    //books: [],
-    // title: '',
-    // category: '',
-    books: {
-        title: null,
-        category: null
-    },
+    books: [],
+    title: '',
+    category: '',
     error: null,
     fetching: false,
-    fetched: false
+    fetched: false,
+    action: 'edit',
 }
 
 function titleReducer (state = initialState, action) {
@@ -37,7 +34,14 @@ function titleReducer (state = initialState, action) {
                 fetching: false,
                 fetched: true,
                 books: action.payload,
-                
+            }
+        }
+        case 'ADD_TITLE': {console.log('USER_ADD', action.payload);
+            return {
+                ...state,
+                books: [...state.books, action.payload],
+                // title: action.payload,
+                // category: action.payload
             }
         }
 
@@ -54,19 +58,9 @@ function titleReducer (state = initialState, action) {
                 books: state.books.filter(books => books.title !== action.payload),
             }
         }
-
-        case 'ADD_TITLE': {
-            return {
-                ...state,
-                books: [...state.books, action.payload],
-                // title: action.payload,
-                // category: action.payload
-            }
-        }
         default:
             return state
     }
-    //return state
 }
 
 export default titleReducer;

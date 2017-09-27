@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import './App.css';
 
-//import store from './redux/store/store';
 import { connect } from 'react-redux';
 import Form from './components/form';
 import Header from './components/header';
 import Table from './components/table';
 
-//import { onChangeForm, onSubmitForm, onDelete } from './redux/actions/index';
-
-const mapStateToProps = (state) => ({
-	return: {
+const mapStateToProps = (state) => {
+	return {
 		user: state
 	}
-});
+};
 
 class App extends Component {
-	// componentWillMount() {
-	// 	this.props.dispatch(onChangeForm())
-	// }
 	
 	render(){
-		//console.log(this.props);
 		
 		return (
 			<div className="App" >
@@ -30,7 +23,6 @@ class App extends Component {
 				<div className="App-intro">
 					<div className="container">
 						<Form />
-						{/*<h1> {this.props.user}</h1>*/}
 						<div className="col-xs-12">
 							<Table  />
 						</div>
