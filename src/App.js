@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-//import axios from 'axios';
 import './App.css';
 
 import { connect } from 'react-redux';
 import Form from './components/form';
 import Header from './components/header';
 import Table from './components/table';
+import FormUpdate from './components/row';
 
 const mapStateToProps = (state) => {
 	return {
@@ -13,7 +13,24 @@ const mapStateToProps = (state) => {
 	}
 };
 
+
 class App extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			status: '',
+			id: null
+		}
+		this.toEdit = this.toEdit.bind(this);
+	}
+
+	toEdit(itemId){
+		this.setState({
+		
+			status: 'edit',
+			id: itemId
+		})
+	}
 	
 	render(){
 		
@@ -22,9 +39,11 @@ class App extends Component {
 				 <Header /> 
 				<div className="App-intro">
 					<div className="container">
-						<Form />
+						{(this.state.status==='edit')?
+						 <FormUpdate itemId={this.state.id}/> : <Form />
+						}
 						<div className="col-xs-12">
-							<Table  />
+							<Table onChangeEdit={this.toEdit}/>
 						</div>
 					</div>
 				</div>

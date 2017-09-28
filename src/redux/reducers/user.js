@@ -7,7 +7,7 @@ let initialState = {
     error: null,
     fetching: false,
     fetched: false,
-    action: 'edit',
+    action: 'edit'
 }
 
 function titleReducer (state = initialState, action) {
@@ -16,7 +16,6 @@ function titleReducer (state = initialState, action) {
             return {
                 ...state,
                  fetching: true,
-               // customers: action.customers
             }
         }
   
@@ -24,7 +23,6 @@ function titleReducer (state = initialState, action) {
             return {
                 ...state,
                  fetching: false, error: action.payload,
-                 
             }
         }
 
@@ -40,8 +38,6 @@ function titleReducer (state = initialState, action) {
             return {
                 ...state,
                 books: [...state.books, action.payload],
-                // title: action.payload,
-                // category: action.payload
             }
         }
 
@@ -54,10 +50,10 @@ function titleReducer (state = initialState, action) {
 
         case 'DELETE_TITLE': {
             return {
-                ...state,
-                books: state.books.filter(books => books.title !== action.payload),
+                books: action.payload
             }
         }
+
         default:
             return state
     }

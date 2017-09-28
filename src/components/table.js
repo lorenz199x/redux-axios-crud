@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { onChangeForm } from '../redux/actions/index';
+import { onChangeForm, onDelete } from '../redux/actions/index';
 
 const mapStateToProps = (store) => {
 	return {
@@ -12,11 +12,15 @@ const mapStateToProps = (store) => {
 class Table extends Component {
    
     componentDidMount() {
-        this.props.dispatch(onChangeForm());
-        
+        this.props.onChangeForm();
+    }
+
+    onDeleteForm(index){
+        this.props.onDelete(index);
     }
 
     render() {
+        
         let { user } = this.props;
         return (
             <table className="table table-inverse">
@@ -37,8 +41,8 @@ class Table extends Component {
                                     <td >{user.category}</td>
                                 
                                     <td>
-                                        <button className="btn btn-info" >Edit</button>
-                                        <button className="btn btn-danger" >Delete</button>
+                                        <button className="btn btn-info" onClick={()=> this.props.onChangeEdit(user.id)} >Edit</button>
+                                        <button className="btn btn-danger" onClick={e => {this.onDeleteForm(user.id)}}>Delete</button>
                                     </td>
                                 </tr> 
                             )
@@ -49,86 +53,8 @@ class Table extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Table);
-
-
-/* 
-export default class Table extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: ''
-        }
-
-        this.sortByAsc = this.sortByAsc.bind(this);
-    }
-
-    sortByAsc = (event) => {
-        this.setState({
-            sorting:event.target.value
-        })
-        //let { customers } = this.props;
-    //     customers.sort((a, b) => { return a.title > b.title })
-    //     .map((title, i) => 
-    //     <Row key={i}>  {title.title}{title.category}</Row>)
-    //     console.log(customers);
-     }
-
-    handleChange = (event) => {
-        this.setState({
-        search:event.target.value
-        })
-    }
-
-    render() {
-        let { onDelete, customers, edit } = this.props;
-       // console.log(customers);
-        // let filteredCustomers = this.props.customers.filter(
-        //     (customers) => {
-        //     //     return customers.firstName.toLowerCase().indexOf(this.state.handleChange.toLowerCase()) !== -1;
-        //     console.log(customers);
-        // }
-        // );   
-
-        let  customers2 = [];  
-
-        this.props.customers.forEach((item,index) => {
-            if(item.title.toLowerCase().indexOf(this.state.search) > -1){
-                customers2.push(
-                    // <Row key={index} data={this.props.customers[index]} edit={edit} onDelete={onDelete} />
-                    this.props.customers[index]
-                );
-            } 
-        })
-
-        customers.sort((a, b) => { return a.title > b.title })
-        // .map((title, i) => 
-        // <Row> {title.title}{title.category}  </Row>)
-        console.log(customers);
-
-        return (
-            <table className="table table-inverse">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Actions</th>
-                        <th> <input type="text" className="form-control" placeholder="Search" onChange={(val)=>{this.handleChange(val)}}/> </th>
-                        <th onClick={this.sortByAsc}> ^ </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        customers2.map((title, i) => {
-                        return <Row key={i} data={title} edit={edit} onDelete={onDelete} >
-                                    
-                                </Row>;
-                    })}
-                    
-                    {/*{customers2}}
-                </tbody>
-            </table>
-        )   
-    }
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ onChangeForm, onDelete }, dispatch);
 }
-*/
+
+export default connect(mapStateToProps, matchDispatchToProps )(Table);

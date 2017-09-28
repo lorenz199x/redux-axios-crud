@@ -1,4 +1,3 @@
-//import React from 'react';
 import axios from 'axios';
 
 export function onChangeForm(title, category) {
@@ -20,8 +19,54 @@ export function onSubmitForm(title, category) {
             console.log('all fields are required');
             
         } else {
-            axios.post("http://localhost:4000/customers")
+                 let formData = {title,category};
+                    axios({
+                    url: `http://localhost:4000/customers`,
+                    method: 'POST',
+                    data: formData
+                })
+                .then((response) => { 
+                    dispatch({
+                        type: 'ADD_TITLE',
+                        payload: {
+                            title,
+                            category
+                        }
+                    });console.log('ADD_LOGS', response)
+                })
+                .catch(error => {
+                        console.log(error);
+                    });
+        } 
+    }
+}
+
+export function onDelete(id) {
+    return (dispatch) => {
+        let formData = {id};
+        console.log('DELETE_LOGS',formData);
+            axios({
+                url: `http://localhost:4000/customers/${id}`,
+                method: 'DELETE',
+            })
+            .then(() => {
+                axios.get("http://localhost:4000/customers")
             .then((response) => {
+                dispatch({ type: 'RECEIVE_TITLE', payload: response.data});
+            })
+        })
+     }
+}
+
+export function onUpdate(title, category){
+    return(dispatch) => {
+        let formData = {title, category};
+        console.log('UPDATE_LOGs', formData);
+        axios({
+            url: `http://localhost:4000/customers/`,
+                method: 'PUT',
+				//data: formData
+			}).then(response => {
                 dispatch({
                     type: 'ADD_TITLE',
                     payload: {
@@ -29,53 +74,20 @@ export function onSubmitForm(title, category) {
                         category
                     }
                 });
-            })
-            .catch(error => {
-                    console.log(error);
-                });
-        }
-       // else {
-            // axios.put("http://localhost:4000/customers/${data.id}")
-            // .then(response => {
-            //     dispatch({
-            //         type: 'UPDATE_TITLE',
-            //         payload: {
-            //             title,
-            //             category
-            //         }
-            //     });
-            //     books = [...books];
-            //     books = books.map(d => {
-            //         if (d.id === response.d.id) {
-			// 				d = response.data;
-			// 			}
-            //     });
-            // })
-            // .catch(error => {
-            //         console.log(error);
-            // });
-        //}
+			}).catch(error => {
+				console.log(error);
+		});
     }
 }
 
-// export  function onDelete(title, category) {
-//     let { books } = this.props;
+// export function onAction(){
 //     return (dispatch) => {
-//         axios.delete("http://localhost:4000/customers/")
-//         .then(response => {
-//             dispatch({
-//                 type: 'DELETE_TITLE',
-//                 payload: {
-//                     title,
-//                     category
-//                 }
-//             })
-//             books === books.filter(d => {
-//                 if (d.id !== books.id) {
-// 					return books;
-// 				}
-//             });
+//         dispatch({
+//             type: 'ACTION_FORM',
+            
 //         })
+        
+
 //     }
 // }
 

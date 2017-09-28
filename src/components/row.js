@@ -1,33 +1,90 @@
 import React, { Component } from 'react';
-import { onChangeForm } from '../redux/actions/index';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { onUpdate } from '../redux/actions/index';
+import axios from 'axios';
 
-const mapStateToProps = (state) => ({
-	return: {
-		user: state
-	}
-});
+const mapStateToProps = (state) => {
+    return {
+        user: state.user.books
+    }
+}
+
+var defaults = {
+	title: '',
+	category: '',
+};
 
 
 
- class Row extends Component {
-     componentDidMount() {
-        this.props.dispatch(onChangeForm())
+class Form extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            form: [...defaults]
+        }
     }
 
+    // componentDidMount() {
+    //     let id = this.props.itemId;
+	// 	axios({
+	// 		url: `http://localhost:4000/customers/${id}`,
+	// 		method: 'GET'
+	// 	}).then(response => {
+	// 		console.log('RESPONSE', response)
+	// 	}).catch(error => {
+	// 		console.log(error);
+	// 	});
+	// }
+
+
+
+   
+    textField(e, field) {
+        this.setState({
+            form: { ...this.state.form},
+            [field]: e.target.value
+        }).bind(this)
+    }
+
+    onUpdate(e){
+        e.preventDefault();
+        this.props.onUpdate(this.state.title, this.state.category);
+    }
 
     render() {
         let { user } = this.props;
+
+      let filteredCustomers = user.filter(
+                    (data) => {
+                    return data.id === this.props.itemId;
+           
+                }
+            );
+         console.log(filteredCustomers);
         return (
-            <tr>
-                <td>{user}</td>
-                <td>{user}</td>
-                <td>
-                    <button className="btn btn-info" >Edit</button>
-                    <button className="btn btn-danger" >Delete</button>
-                </td>
-            </tr>
+            <div className="col-xs-12">
+                <form >
+                    <div className="form-group">
+                        <input type="text" className="form-control" placeholder="Title"   value={filteredCustomers[0].title} onChange={ e => this.textField(e, 'title')} />
+                    </div>
+                    <div className="form-group">
+                        <select className="form-group" name="cats"  value={ filteredCustomers[0].category } onChange={ e => this.textField(e, 'category')}>
+                            <option value="Web Design">Web Design </option>
+                            <option value="Mobile Dev">Mobile Dev </option>
+                            <option value="Web Dev">Web Dev </option>
+                        </select>
+                    </div>
+                        
+                        <button type="submit" className="btn btn-primary" onClick={(e) => {this.onUpdate(e)}}>  <span>Update</span> </button>
+                </form>
+            </div>
         )
     }
 }
-export default connect(mapStateToProps)(Row);
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ onUpdate }, dispatch);
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Form);
