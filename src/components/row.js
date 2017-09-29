@@ -21,22 +21,36 @@ class Form extends Component {
         }
     }
 
-    componentDidMount() {
-       let { user } = this.props;
+   // componentDidMount() {
+    //    let { user } = this.props;
 
-      let filteredCustomers = user.filter(
-                    (data) => {
-                    return data.id === this.props.itemId;
+    //   let filteredCustomers = user.filter(
+    //                 (data) => {
+    //                 return data.id === this.props.itemId;
            
-                }
-            );
-            this.setState({
-                title: filteredCustomers[0].title,
-                category: filteredCustomers[0].category,
-                userList: filteredCustomers
+    //             }
+    //         );
+    //         this.setState({
+    //             title: filteredCustomers[0].title,
+    //             category: filteredCustomers[0].category,
+    //             userList: filteredCustomers
 
-            });
-	}
+    //         });
+	//}
+
+    componentWillReceiveProps(){
+        let { user } = this.props;
+        let filteredCustomers = user.filter(
+            (data) => {
+                 return data.id === this.props.itemId;
+            }
+        );
+        this.setState({
+            title: filteredCustomers[0].title,
+            category: filteredCustomers[0].category,
+            userList: filteredCustomers
+        });
+    }
 
     onUpdate(e, id){
         e.preventDefault();
@@ -44,8 +58,7 @@ class Form extends Component {
     }
 
     render() {
-        
-
+    
         return (
             <div className="col-xs-12">
                 <form >

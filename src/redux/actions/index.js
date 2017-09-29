@@ -41,32 +41,20 @@ export function onSubmitForm(title, category) {
     }
 }
 
-export function onDelete(id, title, category) {
+export function onDelete(id) {
     return (dispatch) => {
-        // if  (title === ''){
-        //     alert('Do you want to delete this ?');
-
-        //     if  (title === '' || category === ''){
-        //         alert('Do you want to delete this ?');
-
-                if  (title === '' || category === ''){
-                    alert('Do you want to delete this ?');
-
-                    // let formData = {id};
-                    //     axios({
-                    //         url: `http://localhost:4000/customers/${id}`,
-                    //         method: 'DELETE',
-                    //     })
-                    //     .then(() => {
-                    //         axios.get("http://localhost:4000/customers")
-                    //     .then((response) => {
-                    //         dispatch({ type: 'RECEIVE_TITLE', payload: response.data});
-                    //     })
-                    // })
-                }
-            //}
-        //}
-    }
+        let formData = {id};
+            axios({
+                url: `http://localhost:4000/customers/${id}`,
+                method: 'DELETE',
+            })
+            .then(() => {
+                axios.get("http://localhost:4000/customers")
+            .then((response) => {
+                dispatch({ type: 'RECEIVE_TITLE', payload: response.data});
+            })
+        })
+     }
 }
 
 export function onUpdate(id, title, category){
