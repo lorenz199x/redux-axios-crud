@@ -16,7 +16,7 @@ export function onChangeForm(title, category) {
 export function onSubmitForm(title, category) {
     return (dispatch) => {
         if  (title === '' || category === ''){
-            console.log('all fields are required');
+            alert('all fields are required');
             
         } else {
                  let formData = {title,category};
@@ -41,20 +41,32 @@ export function onSubmitForm(title, category) {
     }
 }
 
-export function onDelete(id) {
+export function onDelete(id, title, category) {
     return (dispatch) => {
-        let formData = {id};
-            axios({
-                url: `http://localhost:4000/customers/${id}`,
-                method: 'DELETE',
-            })
-            .then(() => {
-                axios.get("http://localhost:4000/customers")
-            .then((response) => {
-                dispatch({ type: 'RECEIVE_TITLE', payload: response.data});
-            })
-        })
-     }
+        // if  (title === ''){
+        //     alert('Do you want to delete this ?');
+
+        //     if  (title === '' || category === ''){
+        //         alert('Do you want to delete this ?');
+
+                if  (title === '' || category === ''){
+                    alert('Do you want to delete this ?');
+
+                    // let formData = {id};
+                    //     axios({
+                    //         url: `http://localhost:4000/customers/${id}`,
+                    //         method: 'DELETE',
+                    //     })
+                    //     .then(() => {
+                    //         axios.get("http://localhost:4000/customers")
+                    //     .then((response) => {
+                    //         dispatch({ type: 'RECEIVE_TITLE', payload: response.data});
+                    //     })
+                    // })
+                }
+            //}
+        //}
+    }
 }
 
 export function onUpdate(id, title, category){
@@ -67,14 +79,20 @@ export function onUpdate(id, title, category){
 			data: formData
 		})
         .then((response) => { 
-                    dispatch({
-                        type: 'UPDATE_TITLE',
-                        payload: {
-                            title,
-                            category
-                        }
-                    });console.log('UPDATE_LOGS', response)
-                })
+            dispatch({
+                type: 'UPDATE_TITLE',
+                payload: {
+                title,
+                category
+            }
+            });console.log('UPDATE_LOGS', response)
+        })
+        .then(() => {
+                axios.get("http://localhost:4000/customers")
+            .then((response) => {
+                dispatch({ type: 'RECEIVE_TITLE', payload: response.data});
+            })
+        })
     }
 }
 

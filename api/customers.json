@@ -1,23 +1,14 @@
 {
   "customers": [
     {
-      "id": 1,
-      "title": "bootstrapsefwf",
-      "category": "Mobile Dev"
-    },
-    {
-      "id": 2,
-      "title": "mob learnfhfhft",
-      "category": "Mobile De"
-    },
-    {
       "title": "bootstrap",
       "category": "Web Design",
       "id": 3
     },
     {
       "id": 4,
-      "title": "android eclipseqq"
+      "title": "android eclipseqq",
+      "category": "Mobile Dev"
     },
     {
       "title": "wordpress angular",

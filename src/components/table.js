@@ -14,7 +14,7 @@ class Table extends Component {
         super(props);
         this.state = {
             search: '',
-            user2: []
+            user2: [],
         }
     }
    

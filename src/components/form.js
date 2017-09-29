@@ -38,6 +38,7 @@ class Form extends Component {
                     </div>
                     <div className="form-group">
                        Category: <select className="form-group" name="cats"  value={this.state.category} onChange={ e => this.setState({category: e.target.value})}>
+                            <option> </option>
                             <option value="Web Design">Web Design </option>
                             <option value="Mobile Dev">Mobile Dev </option>
                             <option value="Web Dev">Web Dev </option>
