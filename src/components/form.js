@@ -9,26 +9,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-var defaults = {
-	title: '',
-	category: '',
-};
-
-
-
 class Form extends Component {
     constructor(props){
         super(props)
         this.state = {
-            form: [...defaults]
+            title: '',
+            category: ''
         }
-    }
-
-    textField(e, field) {
-        this.setState({
-            form: { ...this.state.form},
-            [field]: e.target.value
-        })
     }
 
     onUpdate(id){
@@ -47,10 +34,10 @@ class Form extends Component {
             <div className="col-xs-12">
                 <form onSubmit={onSubmitForm}>
                     <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Title"  onChange={ e => this.textField(e, 'title')} />
+                        Title: <input type="text" className="form-control" placeholder="Title" value={this.state.title} onChange={ e => this.setState({title: e.target.value})} />
                     </div>
                     <div className="form-group">
-                        <select className="form-group" name="cats"  onChange={ e => this.textField(e, 'category')}>
+                       Category: <select className="form-group" name="cats"  value={this.state.category} onChange={ e => this.setState({category: e.target.value})}>
                             <option value="Web Design">Web Design </option>
                             <option value="Mobile Dev">Mobile Dev </option>
                             <option value="Web Dev">Web Dev </option>

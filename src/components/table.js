@@ -33,7 +33,9 @@ class Table extends Component {
         })
     }
 
-    handleSearch() {
+    render() {
+        
+        let { user } = this.props;
         let user2 = [];
         this.props.user.forEach((user, index) => {
             if(user.title.toLowerCase().indexOf(this.state.search) > -1){
@@ -42,15 +44,6 @@ class Table extends Component {
                 );
             }
         })
-        this.setState({
-            user2
-        })
-    }
-
-    render() {
-        
-        //let { user } = this.props;
-        
 
         return (
             <table className="table table-inverse">

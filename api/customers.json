@@ -2,8 +2,8 @@
   "customers": [
     {
       "id": 1,
-      "title": "bootstraps",
-      "category": "Web Dev"
+      "title": "bootstrapsefwf",
+      "category": "Mobile Dev"
     },
     {
       "id": 2,
@@ -16,9 +16,8 @@
       "id": 3
     },
     {
-      "title": "android eclipse",
-      "category": "Mobile Dev",
-      "id": 4
+      "id": 4,
+      "title": "android eclipseqq"
     },
     {
       "title": "wordpress angular",
@@ -36,7 +35,19 @@
       "id": 7
     },
     {
+      "title": "aehar",
+      "category": "Mobile Dev",
       "id": 8
+    },
+    {
+      "title": "dfdfdf",
+      "category": "Web Dev",
+      "id": 9
+    },
+    {
+      "title": "dfgfjdt",
+      "category": "Mobile Dev",
+      "id": 10
     }
   ]
 }

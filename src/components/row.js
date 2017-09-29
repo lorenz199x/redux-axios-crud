@@ -10,50 +10,19 @@ const mapStateToProps = (state) => {
     }
 }
 
-var defaults = {
-	title: '',
-	category: '',
-};
-
-
-
 class Form extends Component {
     constructor(props){
         super(props)
         this.state = {
-            form: [...defaults]
+            title: '',
+            category: '',
+            userList: []
+            // form: [...defaults]
         }
     }
 
-    // componentDidMount() {
-    //     let id = this.props.itemId;
-	// 	axios({
-	// 		url: `http://localhost:4000/customers/${id}`,
-	// 		method: 'GET'
-	// 	}).then(response => {
-	// 		console.log('RESPONSE', response)
-	// 	}).catch(error => {
-	// 		console.log(error);
-	// 	});
-	// }
-
-
-
-   
-    textField(e, field) {
-        this.setState({
-            form: { ...this.state.form},
-            [field]: e.target.value
-        })
-    }
-
-    onUpdate(e, id){
-        e.preventDefault();
-        this.props.onUpdate(id, this.state.title, this.state.category);
-    }
-
-    render() {
-        let { user } = this.props;
+    componentDidMount() {
+       let { user } = this.props;
 
       let filteredCustomers = user.filter(
                     (data) => {
@@ -61,27 +30,37 @@ class Form extends Component {
            
                 }
             );
-            // this.setState({
-            //     title: filteredCustomers[0].title,
-            //     category: filteredCustomers[0].category
-            // });
+            this.setState({
+                title: filteredCustomers[0].title,
+                category: filteredCustomers[0].category,
+                userList: filteredCustomers
 
-        console.log(filteredCustomers);
+            });
+	}
+
+    onUpdate(e, id){
+        e.preventDefault();
+        this.props.onUpdate(id, this.state.title, this.state.category);
+    }
+
+    render() {
+        
+
         return (
             <div className="col-xs-12">
                 <form >
                     <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Title"   value={filteredCustomers[0].title} onChange={ e => this.textField(e, 'title')} />
+                         Title: <input type="text" className="form-control" placeholder="Title" value={this.state.title} onChange={ e => this.setState({title: e.target.value})} />
                     </div>
                     <div className="form-group">
-                        <select className="form-group" name="cats"  value={ filteredCustomers[0].category } onChange={ e => this.textField(e, 'category')}>
+                        Category: <select className="form-group" name="cats"  value={this.state.category} onChange={ e => this.setState({category: e.target.value})}>
                             <option value="Web Design">Web Design </option>
                             <option value="Mobile Dev">Mobile Dev </option>
                             <option value="Web Dev">Web Dev </option>
                         </select>
                     </div>
                         
-                        <button type="submit" className="btn btn-primary" onClick={(e) => {this.onUpdate(e, filteredCustomers[0].id)}}>  <span>Update</span> </button>
+                        <button type="submit" className="btn btn-primary" onClick={(e) => {this.onUpdate(e, this.state.userList[0].id)}}>  <span>Update</span> </button>
                 </form>
             </div>
         )
