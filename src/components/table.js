@@ -10,6 +10,13 @@ const mapStateToProps = (store) => {
 };
 
 class Table extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            search: '',
+            user2: []
+        }
+    }
    
     componentDidMount() {
         this.props.onChangeForm();
@@ -19,9 +26,32 @@ class Table extends Component {
         this.props.onDelete(index);
     }
 
+    handleChange = (event) => {
+        this.setState({
+            search: event.target.value
+            
+        })
+    }
+
+    handleSearch() {
+        let user2 = [];
+        this.props.user.forEach((user, index) => {
+            if(user.title.toLowerCase().indexOf(this.state.search) > -1){
+                user2.push(
+                    this.props.user[index]
+                );
+            }
+        })
+        this.setState({
+            user2
+        })
+    }
+
     render() {
         
-        let { user } = this.props;
+        //let { user } = this.props;
+        
+
         return (
             <table className="table table-inverse">
                 <thead>
@@ -29,14 +59,13 @@ class Table extends Component {
                         <th>Title</th>
                         <th>Category</th>
                         <th>Actions</th>
-                        <th> <input type="text" className="form-control" placeholder="Search" /> </th>
-                        <th> ^ </th>
+                        <th> <input type="text" className="form-control" placeholder="Search" onChange={this.handleChange} /> </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {user.map((user, index) => {
+                    {user2.map((user, index) => {
                             return (
-                                 <tr  key={index}>
+                                 <tr  key={index} data={user}>
                                     <td> {user.title} </td>
                                     <td >{user.category}</td>
                                 

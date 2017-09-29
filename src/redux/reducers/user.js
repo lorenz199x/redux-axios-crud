@@ -34,7 +34,7 @@ function titleReducer (state = initialState, action) {
                 books: action.payload,
             }
         }
-        case 'ADD_TITLE': {console.log('USER_ADD', action.payload);
+        case 'ADD_TITLE': {
             return {
                 ...state,
                 books: [...state.books, action.payload],

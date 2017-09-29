@@ -44,7 +44,6 @@ export function onSubmitForm(title, category) {
 export function onDelete(id) {
     return (dispatch) => {
         let formData = {id};
-        console.log('DELETE_LOGS',formData);
             axios({
                 url: `http://localhost:4000/customers/${id}`,
                 method: 'DELETE',
@@ -58,36 +57,24 @@ export function onDelete(id) {
      }
 }
 
-export function onUpdate(title, category){
+export function onUpdate(id, title, category){
     return(dispatch) => {
-        let formData = {title, category};
-        console.log('UPDATE_LOGs', formData);
+        let formData = {id, title, category};
+        
         axios({
-            url: `http://localhost:4000/customers/`,
-                method: 'PUT',
-				//data: formData
-			}).then(response => {
-                dispatch({
-                    type: 'ADD_TITLE',
-                    payload: {
-                        title,
-                        category
-                    }
-                });
-			}).catch(error => {
-				console.log(error);
-		});
+            url: `http://localhost:4000/customers/${id}`,
+            method: 'PUT',
+			data: formData
+		})
+        .then((response) => { 
+                    dispatch({
+                        type: 'UPDATE_TITLE',
+                        payload: {
+                            title,
+                            category
+                        }
+                    });console.log('UPDATE_LOGS', response)
+                })
     }
 }
-
-// export function onAction(){
-//     return (dispatch) => {
-//         dispatch({
-//             type: 'ACTION_FORM',
-            
-//         })
-        
-
-//     }
-// }
 

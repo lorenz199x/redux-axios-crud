@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { onUpdate } from '../redux/actions/index';
-import axios from 'axios';
+
 
 const mapStateToProps = (state) => {
     return {
@@ -44,12 +44,12 @@ class Form extends Component {
         this.setState({
             form: { ...this.state.form},
             [field]: e.target.value
-        }).bind(this)
+        })
     }
 
-    onUpdate(e){
+    onUpdate(e, id){
         e.preventDefault();
-        this.props.onUpdate(this.state.title, this.state.category);
+        this.props.onUpdate(id, this.state.title, this.state.category);
     }
 
     render() {
@@ -61,7 +61,12 @@ class Form extends Component {
            
                 }
             );
-         console.log(filteredCustomers);
+            // this.setState({
+            //     title: filteredCustomers[0].title,
+            //     category: filteredCustomers[0].category
+            // });
+
+        console.log(filteredCustomers);
         return (
             <div className="col-xs-12">
                 <form >
@@ -76,7 +81,7 @@ class Form extends Component {
                         </select>
                     </div>
                         
-                        <button type="submit" className="btn btn-primary" onClick={(e) => {this.onUpdate(e)}}>  <span>Update</span> </button>
+                        <button type="submit" className="btn btn-primary" onClick={(e) => {this.onUpdate(e, filteredCustomers[0].id)}}>  <span>Update</span> </button>
                 </form>
             </div>
         )

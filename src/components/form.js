@@ -42,7 +42,7 @@ class Form extends Component {
     
 
     render() {
-        let { onSubmitForm, action , textField} = this.props;
+        let { onSubmitForm} = this.props;
         return (
             <div className="col-xs-12">
                 <form onSubmit={onSubmitForm}>
@@ -56,12 +56,6 @@ class Form extends Component {
                             <option value="Web Dev">Web Dev </option>
                         </select>
                     </div>
-{/*                  
-                        {(this.props.action === 'edit')
-                            ? <button type="submit" className="btn btn-primary" onClick={(e) => {this.onUpdate(e)}}><span>Update</span> </button>
-                            :
-                        }*/}
-                        
                         <button type="submit" className="btn btn-primary" onClick={(e) => {this.onSubmitForm(e)}}>  <span>Add</span> </button>
                 </form>
             </div>
