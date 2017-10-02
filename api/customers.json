@@ -1,29 +1,19 @@
 {
   "customers": [
     {
-      "id": 3,
-      "title": "bootstrapssq",
+      "id": 1,
+      "title": "awawawa",
       "category": "Web Design"
     },
     {
-      "id": 4,
-      "title": "android eclipseqq",
-      "category": "Mobile Dev"
-    },
-    {
-      "id": 5,
-      "title": "wordpress angulartEYY",
-      "category": "Web Dev"
-    },
-    {
-      "title": "wordpress angular",
+      "title": "ehseh",
       "category": "Web Dev",
-      "id": 6
+      "id": 2
     },
     {
-      "id": 7,
-      "title": "black",
-      "category": "Web Dev"
+      "title": "t4t34y",
+      "category": "Web Design",
+      "id": 3
     }
   ]
 }

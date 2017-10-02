@@ -26,11 +26,15 @@ export function onSubmitForm(title, category) {
                     data: formData
                 })
                 .then((response) => { 
+                    console.log('IDDDDDd', response.data.id)
+                    let { id } = response.data;
                     dispatch({
                         type: 'ADD_TITLE',
                         payload: {
                             title,
-                            category
+                            category,
+                            id
+                            
                         }
                     });console.log('ADD_LOGS', response)
                 })
@@ -43,7 +47,7 @@ export function onSubmitForm(title, category) {
 
 export function onDelete(id) {
     return (dispatch) => {
-        let formData = {id};
+       
             axios({
                 url: `http://localhost:4000/customers/${id}`,
                 method: 'DELETE',

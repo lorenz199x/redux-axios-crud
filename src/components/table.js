@@ -16,14 +16,13 @@ class Table extends Component {
             search: '',
             user2: [],
         }
-        this.sortingName = this.sortingName.bind(this);
-        this.handleQuery = this.handleQuery.bind(this);
-        
+        this.sortingName = this.sortingName.bind(this);        
         this.handleChange = this.handleChange.bind(this);
     }
    
    componentWillMount() {
     this.props.onChangeForm();
+    console.log('componentWillMount');
    }
 
     onDeleteForm(index){
@@ -34,39 +33,18 @@ class Table extends Component {
         this.setState({
             search: event.target.value
             
-        })
-        this.handleQuery();
-        
-    }
-
-    handleQuery() {
-        let { user } = this.props;
-        let user2 = [];
-        
-        this.props.user.forEach((user, index) => {
-            if(user.title.toLowerCase().indexOf(this.state.search) > -1){
-                user2.push(
-                    user
-                );
-            }
-        })
-        this.setState({
-            user2:user2
-        });
-        console.log('YOW', user2);
+        }) 
     }
 
     sortingName(){
-        let { user } = this.props;
-        let user2 = []
+    
         this.setState(prevState => {
               this.state.user2.sort((a, b) => (a.title > b.title))
         });
-        
+        console.log('sortingName');
     }
 
     componentWillReceiveProps (nextProps) {
-        let { user } = this.props;
         let user2 = [];
         
         nextProps.user.forEach((user, index) => {
@@ -77,15 +55,24 @@ class Table extends Component {
             }
         })
         this.setState({
-            user2:user2
+            user2
         });
-        
         
     }
 
     render() {
         
         let { user } = this.props;
+        let user2 = [];
+        
+        user.forEach((user, index) => {
+            if(user.title.toLowerCase().indexOf(this.state.search) > -1){
+                user2.push(
+                    this.props.user[index]
+                );
+            }
+        })
+
         return (
             <table className="table table-inverse">
                 <thead>
@@ -94,11 +81,11 @@ class Table extends Component {
                         <th>Category</th>
                         <th>Actions</th>
                         <th> <input type="text" className="form-control" placeholder="Search" onChange={this.handleChange} /> </th>
-                        <button onClick={this.sortingName}> sort </button>
+                        <th> <button onClick={this.sortingName}> sort </button></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.user2.map((user, index) => {
+                    {(this.state.search.length === 0 )? this.state.user2.map((user, index) => {
                             return (
                                  <tr  key={index} data={user}>
                                     <td> {user.title} </td>
@@ -110,7 +97,20 @@ class Table extends Component {
                                     </td>
                                 </tr> 
                             )
-                        })}
+                        }): 
+                        user2.map((user, index) => {
+                            return (
+                                 <tr  key={index} data={user}>
+                                    <td> {user.title} </td>
+                                    <td >{user.category}</td>
+                                
+                                    <td>
+                                        <button className="btn btn-info" onClick={()=> this.props.onChangeEdit(user.id)} >Edit</button>
+                                        <button className="btn btn-danger" onClick={e => {this.onDeleteForm(user.id)}}>Delete</button>
+                                    </td>
+                                </tr> 
+                            )
+                        }) }
                 </tbody>
             </table>
         )   
