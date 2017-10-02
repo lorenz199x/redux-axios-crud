@@ -2,7 +2,7 @@
   "customers": [
     {
       "id": 3,
-      "title": "bootstrap",
+      "title": "bootstrapssq",
       "category": "Web Design"
     },
     {
@@ -21,9 +21,9 @@
       "id": 6
     },
     {
-      "title": "gaergaerg",
-      "category": "Web Dev",
-      "id": 7
+      "id": 7,
+      "title": "black",
+      "category": "Web Dev"
     }
   ]
 }

@@ -78,9 +78,10 @@ class Form extends Component {
 // }
 
     onUpdate(e, id){ 
-        this.props.back();
+        
         e.preventDefault();
         this.props.onUpdate(id, this.state.title, this.state.category);
+        this.props.back();
     }
 
     render() {
