@@ -53,7 +53,7 @@ class Table extends Component {
                 );
             }
         })
-
+//comment
         return (
             <table className="table table-inverse">
                 <thead>
