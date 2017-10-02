@@ -32,8 +32,9 @@ class Table extends Component {
     handleChange = (event) => {
         this.setState({
             search: event.target.value
-            
         }) 
+
+        this.props.onChangeForm();
     }
 
     sortingName(){
@@ -62,16 +63,16 @@ class Table extends Component {
 
     render() {
         
-        let { user } = this.props;
-        let user2 = [];
+        // let { user } = this.props;
+         let user2 = [];
         
-        user.forEach((user, index) => {
-            if(user.title.toLowerCase().indexOf(this.state.search) > -1){
-                user2.push(
-                    this.props.user[index]
-                );
-            }
-        })
+        // user.forEach((user, index) => {
+        //     if(user.title.toLowerCase().indexOf(this.state.search) > -1){
+        //         user2.push(
+        //             this.props.user[index]
+        //         );
+        //     }
+       
 
         return (
             <table className="table table-inverse">
