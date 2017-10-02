@@ -38,7 +38,7 @@ class Table extends Component {
         let { user } = this.props;
         let user2 = []
         this.setState(prevState => {
-             return user2.sort((a, b) => (a.title - b.title2))
+             return user.sort((a, b) => (a.title - b.title2))
         });
     }
 
@@ -53,7 +53,7 @@ class Table extends Component {
                 );
             }
         })
-//comment
+
         return (
             <table className="table table-inverse">
                 <thead>
@@ -66,7 +66,7 @@ class Table extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {user2.map((user, index) => {
+                    {user.map((user, index) => {
                             return (
                                  <tr  key={index} data={user}>
                                     <td> {user.title} </td>

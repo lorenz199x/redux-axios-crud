@@ -40,7 +40,7 @@ class Form extends Component {
             });
 	}
 
-    componentWillReceiveProps(nextProps){console.log(nextProps)
+    componentWillReceiveProps(nextProps){
         let { user } = this.props;
         let filteredCustomers = user.filter(
             (data) => {
