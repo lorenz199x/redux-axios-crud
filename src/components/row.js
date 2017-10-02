@@ -16,33 +16,35 @@ class Form extends Component {
         this.state = {
             title: '',
             category: '',
-            userList: []
+            userList: [],
+            id:''
             // form: [...defaults]
         }
     }
 
-   // componentDidMount() {
-    //    let { user } = this.props;
+   componentDidMount() {
+       let { user } = this.props;
 
-    //   let filteredCustomers = user.filter(
-    //                 (data) => {
-    //                 return data.id === this.props.itemId;
+      let filteredCustomers = user.filter(
+                    (data) => {
+                    return data.id === this.props.itemId;
            
-    //             }
-    //         );
-    //         this.setState({
-    //             title: filteredCustomers[0].title,
-    //             category: filteredCustomers[0].category,
-    //             userList: filteredCustomers
+                }
+            );
+            this.setState({
+                title: filteredCustomers[0].title,
+                category: filteredCustomers[0].category,
+                userList: filteredCustomers,
+                id: this.props.itemId
 
-    //         });
-	//}
+            });
+	}
 
-    componentWillReceiveProps(){
+    componentWillReceiveProps(nextProps){console.log(nextProps)
         let { user } = this.props;
         let filteredCustomers = user.filter(
             (data) => {
-                 return data.id === this.props.itemId;
+                 return data.id === nextProps.itemId;
             }
         );
         this.setState({
@@ -52,7 +54,31 @@ class Form extends Component {
         });
     }
 
-    onUpdate(e, id){
+//     shouldComponentUpdate(){
+//     if (this.props.id !== this.state.id)
+//     {
+//         return true;
+//     }
+    
+// }
+
+// componentWillUpdate (){
+//          let { user } = this.props;
+//         let filteredCustomers = user.filter(
+//             (data) => {
+//                  return data.id === this.props.itemId;
+//             }
+//         );
+//         this.setState({
+//             title: filteredCustomers[0].title,
+//             category: filteredCustomers[0].category,
+//             userList: filteredCustomers,
+//             id: this.props.itemId
+//         });
+// }
+
+    onUpdate(e, id){ 
+        this.props.back();
         e.preventDefault();
         this.props.onUpdate(id, this.state.title, this.state.category);
     }
@@ -72,7 +98,7 @@ class Form extends Component {
                             <option value="Web Dev">Web Dev </option>
                         </select>
                     </div>
-                        
+                        <button type="button" className="btn btn-primary" onClick={this.props.back}>  <span>Back</span> </button>
                         <button type="submit" className="btn btn-primary" onClick={(e) => {this.onUpdate(e, this.state.userList[0].id)}}>  <span>Update</span> </button>
                 </form>
             </div>

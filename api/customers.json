@@ -1,9 +1,9 @@
 {
   "customers": [
     {
+      "id": 3,
       "title": "bootstrap",
-      "category": "Web Design",
-      "id": 3
+      "category": "Web Design"
     },
     {
       "id": 4,
@@ -11,9 +11,9 @@
       "category": "Mobile Dev"
     },
     {
-      "title": "wordpress angular",
-      "category": "Web Dev",
-      "id": 5
+      "id": 5,
+      "title": "wordpress angulartEYY",
+      "category": "Web Dev"
     },
     {
       "title": "wordpress angular",
@@ -24,21 +24,6 @@
       "title": "gaergaerg",
       "category": "Web Dev",
       "id": 7
-    },
-    {
-      "title": "aehar",
-      "category": "Mobile Dev",
-      "id": 8
-    },
-    {
-      "title": "dfdfdf",
-      "category": "Web Dev",
-      "id": 9
-    },
-    {
-      "title": "dfgfjdt",
-      "category": "Mobile Dev",
-      "id": 10
     }
   ]
 }

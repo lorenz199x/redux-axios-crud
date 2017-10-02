@@ -16,7 +16,7 @@ class Table extends Component {
             search: '',
             user2: [],
         }
-       // this.sortByPriceAsc = this.sortByPriceAsc.bind(this);
+        this.sortingName = this.sortingName.bind(this);
     }
    
     componentDidMount() {
@@ -24,7 +24,6 @@ class Table extends Component {
     }
 
     onDeleteForm(index){
-        alert.confirm('DELETER');
         this.props.onDelete(index);
     }
 
@@ -36,13 +35,15 @@ class Table extends Component {
     }
 
     sortingName(){
+        let { user } = this.props;
+        let user2 = []
         this.setState(prevState => {
-            this.state.user2.sort((a, b) => (a.title - b.title))
+             return user2.sort((a, b) => (a.title - b.title2))
         });
     }
 
     render() {
-        
+        console.log('AAAAAAAAAAAAA', this.state.user2);
         let { user } = this.props;
         let user2 = [];
         this.props.user.forEach((user, index) => {
@@ -61,7 +62,7 @@ class Table extends Component {
                         <th>Category</th>
                         <th>Actions</th>
                         <th> <input type="text" className="form-control" placeholder="Search" onChange={this.handleChange} /> </th>
-                        <button> </button>
+                        <button onClick={this.sortingName}> </button>
                     </tr>
                 </thead>
                 <tbody>

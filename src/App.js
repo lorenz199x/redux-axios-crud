@@ -20,6 +20,14 @@ class App extends Component {
 			id: null
 		}
 		this.toEdit = this.toEdit.bind(this);
+		this.back = this.back.bind(this);
+	}
+
+	back(){
+		this.setState({
+			status: '',
+			id: null
+		})
 	}
 
 	toEdit(itemId){
@@ -38,7 +46,7 @@ class App extends Component {
 				<div className="App-intro">
 					<div className="container">
 						{(this.state.status==='edit')?
-						 <FormUpdate itemId={this.state.id}/> : <Form />
+						 <FormUpdate back={this.back} itemId={this.state.id}/> : <Form />
 						}
 						<div className="col-xs-12">
 							<Table onChangeEdit={this.toEdit}/>
